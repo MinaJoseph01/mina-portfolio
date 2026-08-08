@@ -4,18 +4,8 @@
    case study tabs, scroll-to-top.
    ========================================================================== */
 
-/* ---------------- dashboard screenshot fallback ----------------
-   Called via onerror="handleImgError(this)" on project images.
-   If the real screenshot hasn't been added yet, hides the broken
-   image and reveals the "add this file" placeholder label instead
-   of showing a broken-image icon. ------------------------------- */
-window.handleImgError = function (img) {
-  img.style.display = 'none';
-  const fallback = img.nextElementSibling;
-  if (fallback) fallback.hidden = false;
-  const wrapper = img.closest('.project-card__media, .case-study__media');
-  if (wrapper) wrapper.classList.add('is-missing');
-};
+/* handleImgError is defined inline in index.html's <head> — see the
+   comment there for why it can't live only in this file. */
 
 document.addEventListener('DOMContentLoaded', () => {
 
