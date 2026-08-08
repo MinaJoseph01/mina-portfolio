@@ -57,6 +57,21 @@
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%220B213E%22/><text x=%2250%22 y=%2266%22 font-size=%2255%22 fill=%22%2323C9B8%22 text-anchor=%22middle%22 font-family=%22Arial%22>M</text></svg>">
+<script>
+  // Defined here (in <head>, before any <img> is parsed) so the onerror
+  // fallback is guaranteed to exist the instant an image fails — if this
+  // lived only in js/script.js at the bottom of the page, a fast-failing
+  // image near the top could fire onerror before that script had loaded,
+  // leaving the browser's raw broken-image + alt-text rendering behind,
+  // which isn't clipped to the card and bleeds into the text below it.
+  window.handleImgError = function (img) {
+    img.style.display = 'none';
+    var fallback = img.nextElementSibling;
+    if (fallback) fallback.hidden = false;
+    var wrapper = img.closest('.project-card__media, .case-study__media');
+    if (wrapper) wrapper.classList.add('is-missing');
+  };
+</script>
 </head>
 <body>
 
